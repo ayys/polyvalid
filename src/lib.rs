@@ -1,3 +1,8 @@
+//! polyvalid is written to provide a single source of truth for validating
+//! package names, usernames, namespace names, app names.
+
+//! The library can then be used from python and JS.
+mod bindings;
 use regex::Regex;
 
 // Rules:
@@ -6,12 +11,29 @@ use regex::Regex;
 // 3. End with an alphanumeric character
 const PATTERN: &str = r"^[a-zA-Z][-_a-zA-Z0-9]+[a-zA-Z0-9]$";
 
-fn matches_pattern(input_string: &str, pattern_var: &str) -> bool {
+fn matches_pattern(input_string: String, pattern_var: &str) -> bool {
     let pattern_regex = Regex::new(pattern_var).unwrap();
-    pattern_regex.is_match(input_string)
+    pattern_regex.is_match(input_string.as_str())
 }
-pub fn is_valid_name(name: &str) -> bool {
-    let matches: bool = matches_pattern(name, PATTERN);
+
+/// Checks if `name` is a valid identifier for username, package name, namespaces, and app names.
+///
+/// # Examples
+///
+/// ```rust
+/// use polyvalid::is_name_valid;
+///
+/// fn main() {
+///     let name = "ayush";
+///     let is_valid = is_name_valid(name.to_string());
+///
+///     assert!(is_valid);
+/// }
+///
+///
+/// ```
+pub fn is_name_valid(name: String) -> bool {
+    let matches: bool = matches_pattern(name.clone(), PATTERN);
     if !matches {
         return false;
     }
@@ -27,7 +49,6 @@ pub fn is_valid_name(name: &str) -> bool {
 
     true
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -61,6 +82,6 @@ mod tests {
         case::invalid_no_underscorees_at_start_and_end("_hello_", false)
     )]
     fn validation_test(#[case] input_string: &str, #[case] should_match: bool) {
-        assert_eq!(is_valid_name(input_string), should_match);
+        assert_eq!(is_name_valid(input_string.to_string()), should_match);
     }
 }
