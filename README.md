@@ -43,14 +43,14 @@ polyvalid.is_name_valid(name) # returns True
 ```
 
 
-### javascript
+### Javascript
 
 ```bash
 npm i polyvalid
 ```
 
 ```js
-import polyvalid;
+import "polyvalid";
 name = "polyvalid";
 polyvalid.is_valid_name(name); // returns true
 ```
