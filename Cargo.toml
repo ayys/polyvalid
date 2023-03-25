@@ -1,14 +1,22 @@
 [package]
 name = "polyvalid"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "A validator for package names, namespace, username and app name on wasmer"
 license = "MIT"
 repository = "https://github.com/ayys/polyvalid"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package.metadata.wapm]
+namespace = "ayys"
+abi = "none"
+bindings = {wai-version = "0.1.0", exports = "polyvalid.wai"}
+
 
 [dependencies]
 regex = "1.7.3"
 rstest = "0.17.0"
+wai-bindgen-rust = "0.2.3"
