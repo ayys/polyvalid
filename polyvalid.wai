@@ -1,0 +1,3 @@
+// validate name for package, namespace, user, app
+
+is-name-valid: func (name: string) -> bool
