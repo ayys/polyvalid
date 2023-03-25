@@ -3,6 +3,9 @@ name = "polyvalid"
 version = "0.1.0"
 edition = "2021"
 description = "A validator for package names, namespace, username and app name on wasmer"
+license = "MIT"
+repository = "https://github.com/ayys/polyvalid"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
