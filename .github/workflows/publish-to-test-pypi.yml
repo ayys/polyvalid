@@ -1,6 +1,6 @@
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ "**" ]
 
 jobs:
   build-and-publish-to-pypi:
@@ -17,11 +17,17 @@ jobs:
     - name: Install cargo-wapm
       run: cargo install cargo-wapm
 
+    - name: Install the wasm32 target
+      run: rustup target add wasm32-unknown-unknown
+
     - name: build wapm package
       run: cargo wapm --dry-run
 
-    - name: build python package
-      run: wasmer wasmer/wasmer-pack-cli --command-name=wasmer-pack --dir=. -- python target/wapm/polyvalid --out-dir pypi
+    - name: build python package and patch pyproject.toml
+      run: |
+        wasmer wasmer/wasmer-pack-cli --command-name=wasmer-pack --dir=. -- python target/wapm --out-dir pypi
+        sed -i.bak 's/name = "polyvalid"/name = "polyvalid"\ndescription = "A validator for package names, namespace, username and app name on wasmer"\nreadme = "README.md"/' pypi/pyproject.toml
+        rm pypi/pyproject.toml.bak || true
 
     - name: Run tests
       run: cargo test --verbose
