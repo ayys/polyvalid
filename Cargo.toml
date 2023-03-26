@@ -1,11 +1,11 @@
 [package]
 name = "polyvalid"
-version = "0.1.1"
-edition = "2021"
 description = "A validator for package names, namespace, username and app name on wasmer"
+version = "0.1.4"
 license = "MIT"
 repository = "https://github.com/ayys/polyvalid"
-
+readme = "README.md"
+edition = "2021"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
