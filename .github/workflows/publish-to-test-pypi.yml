@@ -1,6 +1,6 @@
 on:
-  push:
-    branches: [ "**" ]
+  release:
+    types: [published]
 
 jobs:
   build-and-publish-to-pypi:
