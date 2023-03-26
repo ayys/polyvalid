@@ -56,6 +56,11 @@ polyvalid.is_valid_name(name); // returns true
 ```
 
 
+## Next steps
+
+- [ ] Add CI to autopublish to wapm, pypi, npm
+- [ ] Add tests for python and JS versions of the library
+- [ ] Add wrapper around the python library (to improve usability)
 
 ## Contributing
 
