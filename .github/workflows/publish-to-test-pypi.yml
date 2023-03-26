@@ -52,6 +52,12 @@ jobs:
         --wheel
         --outdir dist/
         pypi
+    - name: Publish to crates.io
+      run: |
+        cargo login $CARGO_TOKEN
+        cargo publish
+      with:
+        CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
 
     - name: Publish distribution 📦 to Test PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
