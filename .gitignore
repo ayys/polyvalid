@@ -21,3 +21,7 @@ Cargo.lock
 
 #/target
 /Cargo.lock
+
+node_modules
+
+generated_bindings

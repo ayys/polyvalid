@@ -1,0 +1,13 @@
+{
+  "name": "polyvalid",
+  "version": "0.1.5",
+  "main": "index.js",
+  "repository": "https://github.com/ayys/polyvalid.git",
+  "author": "Ayys",
+  "dependencies": {
+    "@ayys/polyvalid": "./generated_bindings/JavaScript/package"
+  },
+  "devDependencies": {
+    "jest": "^29.4.1"
+  }
+}
