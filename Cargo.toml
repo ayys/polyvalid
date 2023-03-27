@@ -13,10 +13,19 @@ crate-type = ["cdylib", "rlib"]
 [package.metadata.wapm]
 namespace = "ayys"
 abi = "none"
-bindings = {wai-version = "0.1.0", exports = "polyvalid.wai"}
+bindings = { wai-version = "0.2.0", exports = "polyvalid.wai" }
 
 
 [dependencies]
 regex = "1.7.3"
 rstest = "0.17.0"
-wai-bindgen-rust = "0.2.3"
+wai-bindgen-rust = "0.2.2"
+
+[dev-dependencies]
+anyhow = "1.0.68"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
+wasmer-pack-testing = "0.6.0"
+
+[[test]]
+name = "polyvalid-integration-tests"
+harness = false
