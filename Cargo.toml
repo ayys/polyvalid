@@ -23,6 +23,7 @@ wai-bindgen-rust = "0.2.2"
 
 [dev-dependencies]
 anyhow = "1.0.68"
+insta = { version = "1.18.2", features = ["filters"] }
 tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
 wasmer-pack-testing = "0.6.0"
 
