@@ -23,13 +23,11 @@ fn matches_pattern(input_string: String, pattern_var: &str) -> bool {
 /// ```rust
 /// use polyvalid::is_name_valid;
 ///
-/// fn main() {
-///     let name = "ayush";
-///     let is_valid = is_name_valid(name.to_string());
 ///
-///     assert!(is_valid);
-/// }
+/// let name = "ayush";
+/// let is_valid = is_name_valid(name.to_string());
 ///
+/// assert!(is_valid);
 ///
 /// ```
 pub fn is_name_valid(name: String) -> bool {

@@ -1,5 +1,3 @@
-use wai_bindgen_rust;
-
 wai_bindgen_rust::export!("polyvalid.wai");
 
 pub struct Polyvalid;
