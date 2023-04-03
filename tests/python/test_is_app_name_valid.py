@@ -1,8 +1,8 @@
 import pytest
-
-from polyvalid
+from polyvalid.bindings import polyvalid
 
 polyvalid = polyvalid.bindings.polyvalid()
+
 
 @pytest.mark.parametrize(
     "input_string, should_match",
