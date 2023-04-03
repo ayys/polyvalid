@@ -35,7 +35,10 @@ jobs:
         version: "v3.2.0-beta.1"
 
     - name: Install cargo-wapm
-      run: cargo install cargo-wapm@0.2.2
+      uses: actions-rs/cargo@v1
+      with:
+        command: install
+        args: cargo-wapm@0.2.2 --debug
 
     - name: Install the wasm32 target
       run: rustup target add wasm32-unknown-unknown

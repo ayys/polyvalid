@@ -1,5 +1,5 @@
+import polyvalid
 import pytest
-from polyvalid.bindings import polyvalid
 
 polyvalid = polyvalid.bindings.polyvalid()
 
