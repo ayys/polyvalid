@@ -3,17 +3,18 @@
 
 //! The library can then be used from python and JS.
 mod bindings;
+use anyhow::{bail, Result};
 use regex::Regex;
 
 // Rules:
 // 1. Start with an alphabet character
 // 2. Have one or more alphanumeric characters, or `_` or `-`
 // 3. End with an alphanumeric character
-const PATTERN: &str = r"^[a-zA-Z][-_a-zA-Z0-9]+[a-zA-Z0-9]$";
+const APP_PATTERN: &str = r"^[a-zA-Z][-_a-zA-Z0-9]+[a-zA-Z0-9]$";
 
-fn matches_pattern(input_string: String, pattern_var: &str) -> bool {
+fn matches_pattern(input_string: &str, pattern_var: &str) -> bool {
     let pattern_regex = Regex::new(pattern_var).unwrap();
-    pattern_regex.is_match(input_string.as_str())
+    pattern_regex.is_match(input_string)
 }
 
 /// Checks if `name` is a valid identifier for username, package name, namespaces, and app names.
@@ -21,19 +22,30 @@ fn matches_pattern(input_string: String, pattern_var: &str) -> bool {
 /// # Examples
 ///
 /// ```rust
-/// use polyvalid::is_name_valid;
+/// use polyvalid::is_app_name_valid;
 ///
 ///
 /// let name = "ayush";
-/// let is_valid = is_name_valid(name.to_string());
+/// let result = is_app_name_valid(name.to_string());
 ///
-/// assert!(is_valid);
+/// assert!(result.is_ok());
 ///
 /// ```
-pub fn is_name_valid(name: String) -> bool {
-    let matches: bool = matches_pattern(name.clone(), PATTERN);
+pub fn is_app_name_valid(name: String) -> Result<()> {
+    if name.len() < 3 {
+        bail!(format!(
+            "App name `{name}` needs to be atleast 3 characters long."
+        ))
+    }
+    let matches: bool = matches_pattern(&name, APP_PATTERN);
     if !matches {
-        return false;
+        bail!(format!(
+            r#"App name `{name}` does not conform to wasmer's app-name pattern.
+The name should start with an alphabetical character,
+followed by one or more alphanumeric characters or hyphen/underscore characters,
+and end with an alphanumeric character.
+Please modify the name to match the pattern."#
+        ))
     }
     // Instead of making the regex more complicated,
     // lets handle the additional rules here
@@ -42,11 +54,11 @@ pub fn is_name_valid(name: String) -> bool {
     // we check if string contains `--` because the urls are delemeted with this.
     // So if a name has -- in it, that will break the url rules.
     if name.contains("--") {
-        return false;
+        bail!(format!("The app name `{name}` cannot contain `--`. Please modify your app name to match the pattern."))
     }
-
-    true
+    Ok(())
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -80,6 +92,9 @@ mod tests {
         case::invalid_no_underscorees_at_start_and_end("_hello_", false)
     )]
     fn validation_test(#[case] input_string: &str, #[case] should_match: bool) {
-        assert_eq!(is_name_valid(input_string.to_string()), should_match);
+        assert_eq!(
+            is_app_name_valid(input_string.to_string()).is_ok(),
+            should_match
+        );
     }
 }

@@ -11,9 +11,9 @@ describe("Polyvalid Package validator", () => {
     "Valid-Name",
     "hello-world",
     "hel__lo",
-  ])("Valid Package - (%s)", async (packageName) => {
+  ])("Valid app name - (%s)", async (packageName) => {
     const wasm = await bindings.polyvalid();
-    expect(wasm.isNameValid(packageName)).toBe(true);
+    expect(wasm.isAppNameValid(packageName).isValid).toBe(true);
   });
 
   test.each([
@@ -32,8 +32,8 @@ describe("Polyvalid Package validator", () => {
     "__hello",
     "hello__",
     "_hello_",
-  ])("Invalid Package - (%s)", async (packageName) => {
+  ])("Invalid app name - (%s)", async (packageName) => {
     const wasm = await bindings.polyvalid();
-    expect(wasm.isNameValid(packageName)).toBe(false);
+    expect(wasm.isAppNameValid(packageName).isValid).toBe(false);
   });
 });

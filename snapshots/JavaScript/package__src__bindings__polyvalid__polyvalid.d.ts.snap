@@ -1,6 +1,10 @@
 ---
-source: /Users/xorcist/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.7.0/src/autodiscover.rs
+source: /Users/ayushjha/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.6.0/src/autodiscover.rs
 ---
+export interface Output {
+  isValid: boolean,
+  errorMessage: string,
+}
 export class Polyvalid {
   
   /**
@@ -68,6 +72,6 @@ export class Polyvalid {
   module: WebAssembly.Module | BufferSource | Promise<Response> | Response | WebAssembly.Instance,
   imports?: any,
   ): Promise<void>;
-  isNameValid(name: string): boolean;
+  isAppNameValid(name: string): Output;
 }
 
