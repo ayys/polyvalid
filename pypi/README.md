@@ -25,7 +25,7 @@ use polyvalid;
 
 let name: String = "polyvalid";
 
-assert!(polyvalid::is_name_valid(name));
+assert!(polyvalid::is_app_name_valid(name));
 ```
 
 ### Python
@@ -39,7 +39,7 @@ pip add polyvalid
 import polyvalid
 
 name = "polyvalid"
-polyvalid.is_name_valid(name) # returns True
+polyvalid.is_app_name_valid(name) # returns True
 ```
 
 

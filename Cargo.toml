@@ -17,6 +17,7 @@ bindings = { wai-version = "0.2.0", exports = "polyvalid.wai" }
 
 
 [dependencies]
+anyhow = "1.0.68"
 regex = "1.7.3"
 rstest = "0.17.0"
 wai-bindgen-rust = "0.2.2"

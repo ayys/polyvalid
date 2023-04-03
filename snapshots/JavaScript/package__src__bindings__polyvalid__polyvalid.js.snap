@@ -1,7 +1,7 @@
 ---
-source: /Users/xorcist/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.7.0/src/autodiscover.rs
+source: /Users/ayushjha/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.6.0/src/autodiscover.rs
 ---
-const { utf8_encode, utf8_encoded_len, throw_invalid_bool } = require('./intrinsics.js');
+const { data_view, UTF8_DECODER, utf8_encode, utf8_encoded_len, throw_invalid_bool } = require('./intrinsics.js');
 class Polyvalid {
   addToImports(imports) {
   }
@@ -23,14 +23,22 @@ class Polyvalid {
     }
     this._exports = this.instance.exports;
   }
-  isNameValid(arg0) {
+  isAppNameValid(arg0) {
     const memory = this._exports.memory;
     const realloc = this._exports["canonical_abi_realloc"];
+    const free = this._exports["canonical_abi_free"];
     const ptr0 = utf8_encode(arg0, realloc, memory);
     const len0 = utf8_encoded_len();
-    const ret = this._exports['is-name-valid'](ptr0, len0);
-    const bool1 = ret;
-    return bool1 == 0 ? false : (bool1 == 1 ? true : throw_invalid_bool());
+    const ret = this._exports['is-app-name-valid'](ptr0, len0);
+    const bool1 = data_view(memory).getUint8(ret + 0, true);
+    const ptr2 = data_view(memory).getInt32(ret + 4, true);
+    const len2 = data_view(memory).getInt32(ret + 8, true);
+    const list2 = UTF8_DECODER.decode(new Uint8Array(memory.buffer, ptr2, len2));
+    free(ptr2, len2, 1);
+    return {
+      isValid: bool1 == 0 ? false : (bool1 == 1 ? true : throw_invalid_bool()),
+      errorMessage: list2,
+    };
   }
 }
 

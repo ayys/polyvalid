@@ -1,3 +1,8 @@
 // validate name for package, namespace, user, app
 
-is-name-valid: func (name: string) -> bool
+record output {
+       is-valid: bool,
+       error-message: string // empty if is_valid is true. When is_valid is false, contains error message
+}
+
+is-app-name-valid: func (name: string) -> output
