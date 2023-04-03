@@ -56,7 +56,7 @@ jobs:
       run: |
         cargo login $CARGO_TOKEN
         cargo publish
-      with:
+      env:
         CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
 
     - name: Publish distribution 📦 to Test PyPI
