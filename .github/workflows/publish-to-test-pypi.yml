@@ -43,9 +43,6 @@ jobs:
     - name: build wapm package
       run: cargo wapm --dry-run
 
-    - name: Run tests
-      run: cargo test --verbose
-
     - name: build python package and patch pyproject.toml
       run: |
         wasmer wasmer/wasmer-pack-cli --command-name=wasmer-pack --dir=. -- python target/wapm/polyvalid --out-dir pypi
@@ -60,10 +57,14 @@ jobs:
 
     - name: Build a binary wheel and a source tarball
       run: |
-        apt update
-        apt install python3-dev
+        sudo apt update
+        sudo apt install python3-dev
         pip install build poetry packaging
         python -m build --sdist --wheel --outdir dist/ pypi
+
+    - name: Run tests
+      run: cargo test --verbose
+
     - name: Publish to crates.io
       run: |
         cargo login $CARGO_TOKEN
