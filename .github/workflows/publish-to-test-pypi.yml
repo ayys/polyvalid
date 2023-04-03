@@ -62,10 +62,6 @@ jobs:
         pip install build poetry packaging pytest
         python -m build --sdist --wheel --outdir dist/ pypi
 
-
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-
     - name: Run tests
       run: cargo test --verbose
 
