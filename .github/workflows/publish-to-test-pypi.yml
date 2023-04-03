@@ -59,7 +59,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install python3-dev
-        pip install build poetry packaging
+        pip install build poetry packaging pytest
         python -m build --sdist --wheel --outdir dist/ pypi
 
 
