@@ -1,3 +1,5 @@
+name: Build, test and publish polyvalid
+
 on:
   release:
     types: [published]
@@ -5,12 +7,27 @@ on:
     branches:
       [fix-publish-task]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-publish-to-pypi:
     name: Build and publish Python 🐍 package 📦 to PyPI and TestPyPI
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
+
+    - name: Non-Rust Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          **/generated_bindings/
+          **/node_modules/
+        key: non-rust-cache
 
     - name: Setup Wasmer
       uses: wasmerio/setup-wasmer@v2

@@ -1,4 +1,4 @@
-name: Rust
+name: Build and test polyvalid
 
 on:
   pull_request:
