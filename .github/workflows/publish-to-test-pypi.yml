@@ -44,7 +44,7 @@ jobs:
       run: >-
         python -m
         pip install
-        build
+        build poetry
         --user
 
     - name: Build a binary wheel and a source tarball
