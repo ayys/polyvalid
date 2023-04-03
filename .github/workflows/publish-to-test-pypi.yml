@@ -43,13 +43,6 @@ jobs:
     - name: build wapm package
       run: cargo wapm --dry-run
 
-    - name: Install pypa/build
-      run: >-
-        python -m
-        pip install
-        build poetry packaging
-        --user
-
     - name: Run tests
       run: cargo test --verbose
 
@@ -66,13 +59,11 @@ jobs:
 
 
     - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        build
-        --sdist
-        --wheel
-        --outdir dist/
-        pypi
+      run: |
+        apt update
+        apt install python3-dev
+        pip install build poetry packaging
+        python -m build --sdist --wheel --outdir dist/ pypi
     - name: Publish to crates.io
       run: |
         cargo login $CARGO_TOKEN
