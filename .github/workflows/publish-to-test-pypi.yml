@@ -3,9 +3,6 @@ name: Build, test and publish polyvalid
 on:
   release:
     types: [published]
-  push:
-    branches:
-      [fix-publish-task]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
