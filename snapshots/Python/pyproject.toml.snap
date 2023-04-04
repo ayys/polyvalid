@@ -1,0 +1,13 @@
+---
+source: /home/ayushjha/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.6.0/src/autodiscover.rs
+---
+[project]
+name = "polyvalid"
+version = "0.1.5"
+keywords = []
+dependencies = ["wasmer", "wasmer_compiler_cranelift"]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
