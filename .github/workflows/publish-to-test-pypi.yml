@@ -17,6 +17,8 @@ jobs:
 
     - name: Rust Cache
       uses: Swatinem/rust-cache@v2
+      with:
+        shared-key: rust-cache
 
     - name: Non-Rust Cache
       uses: actions/cache@v3
