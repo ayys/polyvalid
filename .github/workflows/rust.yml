@@ -1,4 +1,4 @@
-name: Rust
+name: Build and test polyvalid
 
 on:
   pull_request:
@@ -18,9 +18,8 @@ env:
 
 jobs:
   build:
-
+    name: Build polyvalid
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Rust Cache

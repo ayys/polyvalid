@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "polyvalid-python"
+version = "0.1.0"
+description = ""
+authors = ["Ayush Jha <ayush@wasmer.io>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+polyvalid = { path = "./generated_bindings/Python", develop = true }
+wasmer-compiler-cranelift = "^1.1.0"
+pytest = "^7.2.2"
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"

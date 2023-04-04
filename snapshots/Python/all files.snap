@@ -1,0 +1,12 @@
+---
+source: /home/ayushjha/.cargo/registry/src/github.com-1ecc6299db9ec823/wasmer-pack-testing-0.6.0/src/autodiscover.rs
+---
+[
+    "generated_bindings/Python/MANIFEST.in",
+    "generated_bindings/Python/polyvalid/__init__.py",
+    "generated_bindings/Python/polyvalid/bindings/__init__.py",
+    "generated_bindings/Python/polyvalid/bindings/polyvalid/__init__.py",
+    "generated_bindings/Python/polyvalid/bindings/polyvalid/bindings.py",
+    "generated_bindings/Python/polyvalid/py.typed",
+    "generated_bindings/Python/pyproject.toml",
+]
